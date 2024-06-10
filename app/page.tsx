@@ -15,8 +15,19 @@ export default function Home() {
     });
     const response_json = await response.json();
     const article = response_json.data;
-    console.log(article);
+    console.log(article.content);
+    const openai_response = await fetch("/api/openai", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ article: article.content }),
+    });
+    const openai_response_json = await openai_response.json();
+    console.log(openai_response_json.choices[0].message.content);
   };
+
+
 
   return (
     <div className="flex flex-col justify-center items-center h-screen gap-4">
