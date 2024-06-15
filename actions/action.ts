@@ -2,6 +2,7 @@
 import { db } from "@/db";
 import { revalidatePath } from "next/cache";
 import { threadsTable, postsTable, InsertPost } from "@/db/schema";
+import { eq, asc } from "drizzle-orm";
 
 interface threadProps {
     threadNumber: number;
@@ -22,7 +23,23 @@ export async function saveThread(thread: threadProps) {
   }
 }
 
-// save thread to db from api
+export async function getAllThreads() {
+    const result = await db
+    .select({
+      threadId: threadsTable.thread_id,
+      postId: postsTable.post_id,
+      content: postsTable.content,
+    })
+    .from(threadsTable)
+    .leftJoin(postsTable, eq(threadsTable.thread_id, postsTable.thread_id))
+    .orderBy(asc(threadsTable.thread_id), asc(postsTable.createdAt));
+    console.log(result);
+}
+
+
+  
+
+
 
 // create thread from db
 
