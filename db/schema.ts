@@ -18,8 +18,8 @@ export const postsTable = pgTable('posts_table', {
     .$onUpdate(() => new Date()),
 });
 
-export type InsertUser = typeof threadsTable.$inferInsert;
-export type SelectUser = typeof threadsTable.$inferSelect;
+export type InsertThread = typeof threadsTable.$inferInsert;
+export type SelectThread = typeof threadsTable.$inferSelect;
 
 export type InsertPost = typeof postsTable.$inferInsert;
 export type SelectPost = typeof postsTable.$inferSelect;
