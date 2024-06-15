@@ -1,9 +1,9 @@
 export interface Post {
-  postNumber: number;
+  post_id: number;
   content: string;
 }
 
 export interface Thread {
-  threadNumber: number;
+  thread_id: number;
   posts: Post[];
 }

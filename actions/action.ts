@@ -5,8 +5,8 @@ import { threadsTable, postsTable, InsertPost } from "@/db/schema";
 import { eq, asc } from "drizzle-orm";
 
 interface threadProps {
-    threadNumber: number;
-    posts: Array<InsertPost>;
+  threadNumber: number;
+  posts: Array<InsertPost>;
 }
 
 export async function saveThread(thread: threadProps) {
@@ -14,7 +14,7 @@ export async function saveThread(thread: threadProps) {
   const posts = thread.posts;
   await db.insert(threadsTable).values({
     thread_id: threadNumber,
-  })
+  });
   for (const post of posts) {
     await db.insert(postsTable).values({
       thread_id: threadNumber,
@@ -24,22 +24,24 @@ export async function saveThread(thread: threadProps) {
 }
 
 export async function getAllThreads() {
-    const result = await db
-    .select({
-      threadId: threadsTable.thread_id,
-      postId: postsTable.post_id,
-      content: postsTable.content,
-    })
-    .from(threadsTable)
-    .leftJoin(postsTable, eq(threadsTable.thread_id, postsTable.thread_id))
-    .orderBy(asc(threadsTable.thread_id), asc(postsTable.createdAt));
-    console.log(result);
+  // const result = await db
+  // .select({
+  //   threadId: threadsTable.thread_id,
+  //   postId: postsTable.post_id,
+  //   content: postsTable.content,
+  // })
+  // .from(threadsTable)
+  // .leftJoin(postsTable, eq(threadsTable.thread_id, postsTable.thread_id))
+  // .orderBy(asc(threadsTable.thread_id), asc(postsTable.createdAt));
+  // console.log(result);
+
+  const threadsWithPosts = await db.query.threadsTable.findMany({
+    with: {
+      posts: true,
+    },
+  });
+  console.log(threadsWithPosts);
 }
-
-
-  
-
-
 
 // create thread from db
 
