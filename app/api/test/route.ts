@@ -1,5 +1,7 @@
 import { getAllThreads } from "@/actions/action";
+import { sql } from "drizzle-orm";
+import { db } from "@/db";
 export async function GET(req: Request) {
-    getAllThreads();
-    return new Response('Hello, world!', { status: 200 });
+  
+  return new Response("Hello, world!", { status: 200 });
 }
