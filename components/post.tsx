@@ -14,7 +14,7 @@ const PostComponent: React.FC<PostComponentProps> = ({ post }) => {
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        <div className="text-sm text-gray-900">{post.content}</div>
+        <div className="text-[13px] text-gray-900">{post.content}</div>
       </div>
     </div>
   );
