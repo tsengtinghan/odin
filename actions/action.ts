@@ -40,7 +40,9 @@ export async function getAllThreads() {
       posts: true,
     },
   });
-  console.log(threadsWithPosts);
+  console.log(threadsWithPosts[0]);
+  return threadsWithPosts;
+
 }
 
 // create thread from db

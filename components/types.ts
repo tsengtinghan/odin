@@ -1,6 +1,7 @@
 export interface Post {
   post_id: number;
   content: string;
+  createdAt: Date;
 }
 
 export interface Thread {
