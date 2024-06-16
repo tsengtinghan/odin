@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import AgentList from "@/components/agent_list";
 
 export default function Dashboard() {
   const handleClick = async () => {
@@ -38,6 +39,9 @@ export default function Dashboard() {
           onChange={(e) => setUrl(e.target.value)}
         />
         <Button onClick={handleClick}>Submit</Button>
+      </div>
+      <div className="pt-10 w-auto">
+        <AgentList />
       </div>
     </div>
   );
