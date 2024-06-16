@@ -1,7 +1,20 @@
 import { integer, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
+
+export const usersTable = pgTable("users_table", {
+  user_id: serial("user_id").primaryKey(),
+  username: text("username").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at")
+    .notNull()
+    .$onUpdate(() => new Date()),
+});
+
 export const threadsTable = pgTable("threads_table", {
   thread_id: serial("thread_id").primaryKey(),
+  user_id: integer("user_id")
+    .notNull()
+    .references(() => usersTable.user_id, { onDelete: "cascade" }),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at")
     .notNull()
@@ -13,6 +26,9 @@ export const postsTable = pgTable("posts_table", {
   thread_id: integer("thread_id")
     .notNull()
     .references(() => threadsTable.thread_id),
+  user_id: integer("user_id")
+    .notNull()
+    .references(() => usersTable.user_id, { onDelete: "cascade" }),
   content: text("content").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at")
@@ -20,8 +36,17 @@ export const postsTable = pgTable("posts_table", {
     .$onUpdate(() => new Date()),
 });
 
-export const threadsRelations = relations(threadsTable, ({ many }) => ({
+export const usersRelations = relations(usersTable, ({ many }) => ({
+  threads: many(threadsTable),
   posts: many(postsTable),
+}));
+
+export const threadsRelations = relations(threadsTable, ({ many, one }) => ({
+  posts: many(postsTable),
+  user: one(usersTable, {
+    fields: [threadsTable.user_id],
+    references: [usersTable.user_id],
+  }),
 }));
 
 export const postsRelations = relations(postsTable, ({ one }) => ({
@@ -29,8 +54,11 @@ export const postsRelations = relations(postsTable, ({ one }) => ({
     fields: [postsTable.thread_id],
     references: [threadsTable.thread_id],
   }),
+  user: one(usersTable, {
+    fields: [postsTable.user_id],
+    references: [usersTable.user_id],
+  }),
 }));
-
 
 export type InsertThread = typeof threadsTable.$inferInsert;
 export type SelectThread = typeof threadsTable.$inferSelect;
