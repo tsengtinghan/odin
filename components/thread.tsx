@@ -10,7 +10,7 @@ const ThreadComponent: React.FC<ThreadComponentProps> = ({ thread }) => {
   return (
     <div className="mb-4 rounded">
       {thread.posts.map((post, index) => (
-        <PostComponent key={post.post_id} post={post} />
+        <PostComponent key={post.post_id} post={post} user={thread.user}/>
       ))}
     </div>
   );

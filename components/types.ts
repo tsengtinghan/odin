@@ -3,7 +3,17 @@ export interface Post {
   content: string;
 }
 
+export interface User {
+  user_id: number;
+  username: string;
+  bio: string | null; // Allow 'null' for the 'bio' property
+}
+
 export interface Thread {
+  user_id: number;
+  createdAt: Date;
+  updatedAt: Date;
   thread_id: number;
+  user: User; // Use the updated User interface
   posts: Post[];
 }
