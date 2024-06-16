@@ -32,7 +32,7 @@ export async function POST(request: Request): Promise<Response> {
   const threads = content.threads;
   console.log("threads: ", threads);
   for (const thread of threads) {
-    await saveThread(thread);
+    await saveThread(thread, 2);
   }
   return new Response(JSON.stringify(response), {
     headers: {

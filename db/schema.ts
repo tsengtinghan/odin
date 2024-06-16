@@ -9,7 +9,6 @@ export const usersTable = pgTable("users_table", {
   profilePicture: text("profile_picture"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at")
-    .notNull()
     .$onUpdate(() => new Date()),
 });
 

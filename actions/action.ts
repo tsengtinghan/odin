@@ -10,13 +10,20 @@ interface threadProps {
   posts: Array<InsertPost>;
 }
 
-export async function saveThread(thread: threadProps) {
+export async function saveThread(thread: threadProps, userId: number) {
   const posts = thread.posts;
-  const newThread = await db.insert(threadsTable).values({}).returning();
+  const newThread = await db
+    .insert(threadsTable)
+    .values({
+      user_id: userId,
+    })
+    .returning();
+
   console.log("newThread", newThread);
   for (const post of posts) {
     await db.insert(postsTable).values({
       thread_id: newThread[0].thread_id,
+      user_id: userId,
       content: post.content,
     });
   }
@@ -35,15 +42,14 @@ export async function getAllThreads() {
   // .orderBy(asc(threadsTable.thread_id), asc(postsTable.createdAt));
   // console.log(result);
 
-  const threadsWithPosts = await db.query.threadsTable.findMany({
+  const threadsWithUsersAndPosts = await db.query.threadsTable.findMany({
     with: {
+      user: true,
       posts: true,
     },
   });
-  console.log(threadsWithPosts[0]);
-  return threadsWithPosts;
+  console.log(threadsWithUsersAndPosts);
+  return threadsWithUsersAndPosts;
 }
-
-
 
 // create thread from db

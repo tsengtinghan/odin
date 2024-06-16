@@ -9,5 +9,6 @@ export default defineConfig({
   dialect: 'postgresql',
   dbCredentials: {
     url: process.env.SUPABASE_URL!,
+    port: 5432,
   },
 });
