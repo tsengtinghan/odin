@@ -14,18 +14,21 @@ export default function AgentList() {
     {
       username: "shadcn",
       bio: "I am a software engineer",
+      profile_image: "https://github.com/shadcn.png"
     },
     {
-      username: "shadcn",
-      bio: "I am a software engineer",
+      username: "Steve",
+      bio: "I have a phd in neuro science",
+      profile_image: "/steve.jpeg"
     },
     {
-      username: "shadcn",
-      bio: "I am a software engineer",
+      username: "Koro_sensei",
+      bio: "I follow every new anime series",
+      profile_image: "/Koro_sensei.webp"
     },
     {
-      username: "shadcn",
-      bio: "I am a software engineer",
+      username: "小助理",
+      bio: "我負責發中文內容",
     },
   ];
   return (
@@ -44,10 +47,10 @@ export default function AgentList() {
               <TableCell>
                 <Avatar>
                   <AvatarImage
-                    src="https://github.com/shadcn.png"
+                    src={agent.profile_image}
                     alt="@shadcn"
                   />
-                  <AvatarFallback>CN</AvatarFallback>
+                  <AvatarFallback>TW</AvatarFallback>
                 </Avatar>
               </TableCell>
               <TableCell>{agent.username}</TableCell>
