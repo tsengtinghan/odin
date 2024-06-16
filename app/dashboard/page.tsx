@@ -29,7 +29,7 @@ export default function Dashboard() {
   const [url, setUrl] = useState<string>("");
   return (
     <div className="flex flex-col justify-center items-center gap-4">
-      <h1 className="text-center text-xl">Save articles</h1>
+      <h1 className="text-center text-sm">Save articles</h1>
       <div className="flex space-between gap-4">
         <Input
           value={url}
