@@ -6,7 +6,7 @@ import { getAllThreads } from "@/actions/action";
 export default async function Feed() {
   const threads: Thread[] = await getAllThreads();
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-lg mx-auto">
       {threads?.length > 0
         ? threads.map((thread: Thread) => (
             <ThreadComponent key={thread.thread_id} thread={thread} />
