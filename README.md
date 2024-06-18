@@ -9,7 +9,7 @@ https://github.com/tsengtinghan/odin/assets/78808751/ca1e3240-e6c9-45f7-a3ae-8e3
 
 
 ## todos
-[ ] make sure region of db and vercel match
+- [ ] make sure region of db and vercel match
 
 ---
 
