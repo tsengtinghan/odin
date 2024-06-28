@@ -60,7 +60,7 @@ const PostComponent: React.FC<PostComponentProps> = ({ post, user, isLast }) => 
               <MoreHorizontal size={20} />
             </Button>
           </div>
-          <p className="text-gray-800 mb-3">{post.content}</p>
+          <p className="text-gray-800 text-sm mb-3">{post.content}</p>
           <div className="flex items-center space-x-4 text-gray-500">
             <Button variant="ghost" size="sm" className="flex items-center space-x-1">
               <MessageSquare size={18} />

@@ -39,7 +39,7 @@ const ThreadComponent: React.FC<ThreadComponentProps> = ({ thread }) => {
           <Button
             onClick={toggleExpanded}
             variant="ghost"
-            className="w-full flex items-center justify-center py-2 text-gray-500 hover:bg-gray-100"
+            className="w-1/2 mx-auto flex items-center justify-center py-2 text-gray-500 hover:bg-gray-100"
           >
             {expanded ? (
               <>
