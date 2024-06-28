@@ -17,7 +17,7 @@ interface PostComponentProps {
 
 const PostComponent: React.FC<PostComponentProps> = ({ post, user, isLast }) => {
   return (
-    <div className="bg-white p-4 hover:bg-gray-50 transition-colors duration-200">
+    <div className="bg-white p-4">
       <div className="flex space-x-4">
         <div className="flex flex-col items-center">
           <HoverCard openDelay={200} closeDelay={200}>
