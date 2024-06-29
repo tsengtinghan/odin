@@ -6,6 +6,8 @@ export interface Post {
 export interface User {
   user_id: number;
   username: string;
+  display_name: string;
+  avatar_url: string;
   bio: string | null; // Allow 'null' for the 'bio' property
 }
 

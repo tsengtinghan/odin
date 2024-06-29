@@ -38,11 +38,6 @@ const PostComponent: React.FC<PostComponentProps> = ({ post, user, isLast }) => 
                   <p className="text-sm text-gray-500">
                     {user.bio ? user.bio : "No bio provided"}
                   </p>
-                  <div className="flex items-center pt-2">
-                    <span className="text-xs text-gray-400">
-                      Joined {new Date(user.joined_date).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-                    </span>
-                  </div>
                 </div>
               </div>
             </HoverCardContent>

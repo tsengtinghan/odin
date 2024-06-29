@@ -1,5 +1,5 @@
 {
-  "id": "f5f71bc3-9731-448a-bb10-ca194649b902",
+  "id": "d480d24f-78f5-45a1-b664-eae02ea61a35",
   "prevId": "73ce1404-89cc-4215-9f6d-bbea16be34f0",
   "version": "7",
   "dialect": "postgresql",
@@ -143,6 +143,18 @@
           "primaryKey": false,
           "notNull": true
         },
+        "display_name": {
+          "name": "display_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "avatar_url": {
+          "name": "avatar_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
         "bio": {
           "name": "bio",
           "type": "text",
@@ -151,12 +163,6 @@
         },
         "prompt": {
           "name": "prompt",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "profile_picture": {
-          "name": "profile_picture",
           "type": "text",
           "primaryKey": false,
           "notNull": false

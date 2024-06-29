@@ -4,9 +4,10 @@ import { relations } from "drizzle-orm";
 export const usersTable = pgTable("users_table", {
   user_id: serial("user_id").primaryKey(),
   username: text("username").notNull(),
+  display_name: text("display_name"),
+  avatar_url: text("avatar_url"),
   bio: text("bio"),
   prompt: text("prompt"),
-  profilePicture: text("profile_picture"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at")
     .$onUpdate(() => new Date()),
