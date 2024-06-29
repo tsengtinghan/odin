@@ -9,8 +9,7 @@ export const usersTable = pgTable("users_table", {
   bio: text("bio"),
   prompt: text("prompt"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at")
-    .$onUpdate(() => new Date()),
+  updatedAt: timestamp("updated_at").$onUpdate(() => new Date()),
 });
 
 export const threadsTable = pgTable("threads_table", {
@@ -39,6 +38,15 @@ export const postsTable = pgTable("posts_table", {
     .$onUpdate(() => new Date()),
 });
 
+export const imagesTable = pgTable("images_table", {
+  image_id: serial("image_id").primaryKey(),
+  thread_id: integer("thread_id")
+    .notNull()
+    .references(() => threadsTable.thread_id, { onDelete: "cascade" }),
+  image_url: text("image_url").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 export const usersRelations = relations(usersTable, ({ many }) => ({
   threads: many(threadsTable),
   posts: many(postsTable),
@@ -50,6 +58,7 @@ export const threadsRelations = relations(threadsTable, ({ many, one }) => ({
     fields: [threadsTable.user_id],
     references: [usersTable.user_id],
   }),
+  images: many(imagesTable),
 }));
 
 export const postsRelations = relations(postsTable, ({ one }) => ({
@@ -60,6 +69,13 @@ export const postsRelations = relations(postsTable, ({ one }) => ({
   user: one(usersTable, {
     fields: [postsTable.user_id],
     references: [usersTable.user_id],
+  }),
+}));
+
+export const imagesRelatins = relations(imagesTable, ({ one }) => ({
+  threads: one(threadsTable, {
+    fields: [imagesTable.thread_id],
+    references: [threadsTable.thread_id],
   }),
 }));
 

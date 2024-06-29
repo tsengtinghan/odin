@@ -31,21 +31,11 @@ export async function saveThread(thread: threadProps, userId: number) {
 }
 
 export async function getAllThreads() {
-  // const result = await db
-  // .select({
-  //   threadId: threadsTable.thread_id,
-  //   postId: postsTable.post_id,
-  //   content: postsTable.content,
-  // })
-  // .from(threadsTable)
-  // .leftJoin(postsTable, eq(threadsTable.thread_id, postsTable.thread_id))
-  // .orderBy(asc(threadsTable.thread_id), asc(postsTable.createdAt));
-  // console.log(result);
-
   const threadsWithUsersAndPosts = await db.query.threadsTable.findMany({
     with: {
       user: true,
       posts: true,
+      images: true,
     },
   });
   console.log(threadsWithUsersAndPosts);

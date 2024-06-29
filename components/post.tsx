@@ -42,7 +42,7 @@ const PostComponent: React.FC<PostComponentProps> = ({ post, user, isLast }) => 
               </div>
             </HoverCardContent>
           </HoverCard>
-          {!isLast && <div className="w-0.5 bg-gray-200 h-full mt-2"></div>}
+          {!isLast && <div className="w-px bg-gray-200 h-full mt-2"></div>}
         </div>
         
         <div className="flex-1">

@@ -79,7 +79,6 @@ const ThreadComponent: React.FC<ThreadComponentProps> = ({ thread }) => {
           >
             <motion.div
               initial={false}
-              animate={{ rotate: expanded ? 180 : 0 }}
               transition={{ duration: 0.3 }}
             >
               {expanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
