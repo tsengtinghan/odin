@@ -7,7 +7,7 @@ import { eq, asc } from "drizzle-orm";
 
 interface threadProps {
   threadNumber: number;
-  posts: Array<InsertPost>;
+  posts: any;
 }
 
 export async function saveThread(thread: threadProps, userId: number) {
@@ -24,7 +24,7 @@ export async function saveThread(thread: threadProps, userId: number) {
     await db.insert(postsTable).values({
       thread_id: newThread[0].thread_id,
       user_id: userId,
-      content: post.content,
+      content: post,
     });
   }
   revalidatePath("/feed");
