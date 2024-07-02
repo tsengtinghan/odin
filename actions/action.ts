@@ -2,12 +2,19 @@
 import { db } from "@/db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { threadsTable, postsTable, InsertPost } from "@/db/schema";
+import { threadsTable, postsTable, imagesTable } from "@/db/schema";
 import { eq, asc } from "drizzle-orm";
 
 interface threadProps {
   threadNumber: number;
   posts: any;
+}
+
+export async function saveImage(thread_id: number, image_url: string) {
+  await db.insert(imagesTable).values({
+    thread_id,
+    image_url,
+  });
 }
 
 export async function saveThread(thread: threadProps, userId: number) {
@@ -41,5 +48,6 @@ export async function getAllThreads() {
   console.log(threadsWithUsersAndPosts);
   return threadsWithUsersAndPosts;
 }
+
 
 // create thread from db
