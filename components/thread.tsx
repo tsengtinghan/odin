@@ -1,9 +1,9 @@
-"use client";
+'use client'
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Thread } from "./types";
 import PostComponent from "./post";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ThreadComponentProps {
   thread: Thread;
@@ -11,17 +11,30 @@ interface ThreadComponentProps {
 
 const ThreadComponent: React.FC<ThreadComponentProps> = ({ thread }) => {
   const [expanded, setExpanded] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
   };
 
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === thread.images.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? thread.images.length - 1 : prevIndex - 1
+    );
+  };
+
   const containerVariants = {
     hidden: { opacity: 0, height: 0 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       height: "auto",
-      transition: { 
+      transition: {
         duration: 0.3,
         when: "beforeChildren",
         staggerChildren: 0.1
@@ -31,8 +44,8 @@ const ThreadComponent: React.FC<ThreadComponentProps> = ({ thread }) => {
 
   const childVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 0.3 }
     }
@@ -40,6 +53,42 @@ const ThreadComponent: React.FC<ThreadComponentProps> = ({ thread }) => {
 
   return (
     <div className="bg-white rounded-lg shadow-sm overflow-hidden mb-4">
+      {thread.images && thread.images.length > 0 && (
+        <div className="relative h-64 mb-4">
+          <img
+            src={thread.images[currentImageIndex]}
+            alt={`Thread image ${currentImageIndex + 1}`}
+            className="w-full h-full object-cover"
+          />
+          {thread.images.length > 1 && (
+            <>
+              <button
+                onClick={prevImage}
+                className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2"
+              >
+                <ChevronLeft size={24} />
+              </button>
+              <button
+                onClick={nextImage}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white rounded-full p-2"
+              >
+                <ChevronRight size={24} />
+              </button>
+              <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                {thread.images.map((_, index) => (
+                  <div
+                    key={index}
+                    className={`w-2 h-2 rounded-full ${
+                      index === currentImageIndex ? "bg-white" : "bg-gray-300"
+                    }`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      )}
+
       <PostComponent
         key={thread.posts[0].post_id}
         post={thread.posts[0]}
@@ -72,7 +121,7 @@ const ThreadComponent: React.FC<ThreadComponentProps> = ({ thread }) => {
 
           <motion.button
             onClick={toggleExpanded}
-            className="bg-white rounded-lg shadow-sm overflow-hidden mb-4 w-1/2 text-sm py-2 text-gray-500  flex items-center justify-center"
+            className="bg-white rounded-lg shadow-sm overflow-hidden mb-4 w-1/2 text-sm py-2 text-gray-500 flex items-center justify-center"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}

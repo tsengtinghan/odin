@@ -3,12 +3,19 @@ export interface Post {
   content: string;
 }
 
+export interface Image {
+
+}
+
 export interface User {
   user_id: number;
   username: string;
-  display_name: string;
-  avatar_url: string;
-  bio: string | null; // Allow 'null' for the 'bio' property
+  display_name: string | null;
+  avatar_url: string | null;
+  bio: string | null;
+  prompt: string | null;
+  createdAt: Date;
+  updatedAt: Date | null;
 }
 
 export interface Thread {
@@ -18,4 +25,8 @@ export interface Thread {
   thread_id: number;
   user: User; // Use the updated User interface
   posts: Post[];
+  images: any
 }
+
+
+
