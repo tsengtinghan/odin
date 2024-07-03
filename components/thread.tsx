@@ -56,7 +56,7 @@ const ThreadComponent: React.FC<ThreadComponentProps> = ({ thread }) => {
       {thread.images && thread.images.length > 0 && (
         <div className="relative h-64 mb-4">
           <img
-            src={thread.images[currentImageIndex]}
+            src={thread.images[currentImageIndex].image_url}
             alt={`Thread image ${currentImageIndex + 1}`}
             className="w-full h-full object-cover"
           />
