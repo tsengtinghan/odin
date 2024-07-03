@@ -6,8 +6,8 @@ import { threadsTable, postsTable, imagesTable } from "@/db/schema";
 import { eq, asc } from "drizzle-orm";
 
 interface threadProps {
-  threadNumber: number;
   posts: any;
+  image_prompt: string[];
 }
 
 export async function saveImage(thread_id: number, image_url: string) {
@@ -25,7 +25,7 @@ export async function saveThread(thread: threadProps, userId: number) {
       user_id: userId,
     })
     .returning();
-
+  
   console.log("newThread", newThread);
   for (const post of posts) {
     await db.insert(postsTable).values({
@@ -35,6 +35,7 @@ export async function saveThread(thread: threadProps, userId: number) {
     });
   }
   revalidatePath("/feed");
+  return newThread;
 }
 
 export async function getAllThreads() {

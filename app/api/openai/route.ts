@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { saveThread } from "@/actions/action";
+import { generateImage } from "@/actions/fal/fal_actions";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -37,7 +38,8 @@ export async function POST(request: Request): Promise<Response> {
   const threads = content.threads;
   console.log("threads: ", threads);
   for (const thread of threads) {
-    await saveThread(thread, 2);
+    const newThread = await saveThread(thread, 2);
+    await generateImage(thread.image_prompt, newThread[0].thread_id)
   }
   return new Response(JSON.stringify(response), {
     headers: {
