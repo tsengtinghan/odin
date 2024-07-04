@@ -59,11 +59,9 @@ const PostComponent: React.FC<PostComponentProps> = ({ post, user, isLast }) => 
           <div className="flex items-center space-x-4 text-gray-500">
             <Button variant="ghost" size="sm" className="flex items-center space-x-1">
               <MessageSquare size={18} />
-              <span>{post.comments_count}</span>
             </Button>
             <Button variant="ghost" size="sm" className="flex items-center space-x-1">
               <Heart size={18} />
-              <span>{post.likes_count}</span>
             </Button>
             <Button variant="ghost" size="sm" className="flex items-center space-x-1">
               <Share2 size={18} />

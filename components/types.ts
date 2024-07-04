@@ -11,7 +11,7 @@ export interface User {
   user_id: number;
   username: string;
   display_name: string | null;
-  avatar_url: string | null;
+  avatar_url: string | undefined;
   bio: string | null;
   prompt: string | null;
   createdAt: Date;

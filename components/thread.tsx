@@ -75,7 +75,7 @@ const ThreadComponent: React.FC<ThreadComponentProps> = ({ thread }) => {
                 <ChevronRight size={24} />
               </button>
               <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                {thread.images.map((_, index) => (
+                {thread.images.map((_: any, index: number) => (
                   <div
                     key={index}
                     className={`w-2 h-2 rounded-full ${
